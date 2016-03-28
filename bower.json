@@ -1,0 +1,25 @@
+{
+  "name": "save2drive",
+  "description": "Save your files to drive",
+  "main": "app.js",
+  "authors": [
+    "samundrak <samundrak@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/samundrak/save-to-drive",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue-resource": "^0.7.0",
+    "underscore": "^1.8.3",
+    "bootstrap": "^3.3.6",
+    "vue-router": "^0.7.11",
+    "vue": "^1.0.18"
+  }
+}

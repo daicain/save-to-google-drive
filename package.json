@@ -1,0 +1,26 @@
+{
+  "name": "save2drive",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "forever start --minUptime 1000 --spinSleepTime 1000 app.js",
+    "stop":  "forever stop app.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "emailjs": "^1.0.4",
+    "express": "~4.13.1",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^3.1.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1",
+    "pretty-time": "^0.2.0",
+    "prettysize": "0.0.3",
+    "progress-stream": "https://github.com/samundrak/progress-stream.git",
+    "request": "^2.69.0",
+    "serve-favicon": "~2.3.0",
+    "socketio": "^1.0.0"
+  }
+}

@@ -1,0 +1,127 @@
+extends layout
+
+block content
+	#div.alert.alert-info
+		div
+			span.glyphicon.glyphicon-bell
+			span 	If its your first time or there is problem then please
+			a.btn.btn-default(style="margin-left:10px;" href="/authenticate").glyphicon.glyphicon-user 	Authenticate
+	#files.row
+		.col-md-12
+			ul.list-group
+				li.list-group-item.active
+					span.glyphicon.glyphicon-asterisk
+					span 	File will be uploaded to root
+				li.list-group-item(v-if="!loading && fileDetails.length")
+						div(v-for="file in fileDetails" )
+							.row
+								.col-md-12
+									table.table-striped.table
+										tr
+											th SN
+											th Name
+											th Type
+											th Size
+										tr
+											td {{$index+1}}
+											td {{file.name}}
+											td {{file.type}}
+											td {{file.size}}
+									div.label.label-danger.pull-right(v-on:click="removeView($index)" style="cursor:pointer")
+										span.glyphicon.glyphicon-remove-circle
+										span 	Remove
+									div.label.label-info.pull-right(v-on:click="toggleView($index)" style="cursor:pointer")
+										span.glyphicon.glyphicon-eye-open
+										span 	Toggle view
+							.row(id="{{$index}}")
+								.col-md-12
+									div
+										div.label.label-default
+											span.glyphicon.glyphicon-transfer
+											span 	Progress
+									div.progress(style="margin-top:2px;")
+											.progress-bar.progress-bar-striped(role="progressbar" aria-valuenow="{{file.progress.at}}" aria-valuemin="0" aria-valuemax="100" style="width:{{file.progress.at}}%" id="{{file.hash}}") {{file.progress.at}}%
+								.col-md-12
+									a(:href="file.url").btn.btn-primary
+										span.glyphicon.glyphicon-globe 
+										span	File Url
+								.col-md-12
+									.row
+										.col-sm-3
+											.label-default.label
+												span.glyphicon.glyphicon-upload
+												span 	Uploaded
+											br
+											br
+											span(class="progress-status") {{file.progress.uploaded || 0}}
+										.col-sm-3
+											.label-default.label
+												span.glyphicon.glyphicon-time 	
+												span	Remaining
+											br
+											br
+											span(class="progress-status") {{file.progress.remains || 0}}
+										.col-sm-3
+											.label-default.label
+												span.glyphicon.glyphicon-time
+												span 	Time Left
+											br
+											br
+											span(class="progress-status") {{file.progress.eta || 0}}
+										.col-sm-3
+											.label-default.label
+												span.glyphicon.glyphicon-sort
+												span 	Speed
+											br
+											br
+											span(class="progress-status") {{file.progress.speed || 0}}
+							hr
+				li.list-group-item(v-if="message").alert.alert-danger
+					span.glyphicon.glyphicon-remove
+					span 	{{{ message }}}
+				form(v-on:submit.prevent="submitUrlForUpload")
+				li.list-group-item
+					input(@keyup.enter="submitUrlForUpload" placeholder="Enter File URL..." v-model="file_url" type="url" class="form-control")
+				li.list-group-item
+					input(type="checkbox" value="true" id="isEmail"  v-model="isEmail" )
+					label(for="isEmail" style="margin-left:5px")	Send me email whenever file upload is success or error
+					input(@keyup.enter="submitUrlForUpload" type="text" v-if="isEmail" v-model="email" placeholder="Enter your email here" class="form-control")
+				li.list-group-item
+					button.btn.btn-primary(v-on:click="submitUrlForUpload").glyphicon.glyphicon-upload 	Upload
+				br
+				li.list-group-item.active
+					span.glyphicon.glyphicon-asterisk
+					span  Some Key Points
+				li.list-group-item
+					span.glyphicon.glyphicon-plus
+					span  If url is too long and there is error please short the link
+						a(href="http://bit.ly" target="_blank")  Click Here to Shorten
+				li.list-group-item
+					span.glyphicon.glyphicon-plus
+					span  You can Upload multiple files and just close the tab
+				li.list-group-item
+					span.glyphicon.glyphicon-plus
+					span  Small file will be uploaded within time if file is huge then you can close the tab ,file will be uploaded to drive
+				li.list-group-item
+					span.glyphicon.glyphicon-plus
+					span  If you see no response then Authenticate once again
+				li.list-group-item
+					.alert.alert-warning
+						span.glyphicon.glyphicon-plus
+						span  You can close the tab once the uploading is started and forget about it, the file will be uploaded but rembember you will not see upload status next time you visit this page again.
+				li.list-group-item
+					.alert.alert-danger
+						span.glyphicon.glyphicon-plus
+						span   We have no access to your files , Neither we touch any your private files, Only file is uploaded nothing else is done
+				li.list-group-item
+						div Save any files from internet to google drive without downloading it to your computer and reuploading it to drive. 
+						| You can download any large ,small and big size files from web and within few minutes it will be on your drive.
+						| Email notification is also available with progress report of upload progress.
+						| You can just enter the url and close the tab file will be uploaded.
+						|Just enter the file's web address (or URL), pick a cloud service and, within seconds, the file will become available in your online account. The download is from cloud to cloud and therefore much faster.
+						|Save is also useful for mobile users as you can remotely download files, including file types that aren't supported by your mobile phone or tablet, to your mobile devices via Google Drive.
+						|Email me feedbacks or bug at Samundrak@yahoo.com
+
+				//li.list-group-item
+					.alert.alert-success IF you want to look the codes you can always have a look on
+						a(href="https://github.com/samundrak/save-to-drive" target="_blank")  Github
