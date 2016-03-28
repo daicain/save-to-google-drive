@@ -2,5 +2,3 @@ node_modules
 .idea/
 .idea/workspace.xml
 bower_components
-client_secret.json
-./client_secret.json
